@@ -13,7 +13,7 @@ import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <div>
+    <>
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
@@ -24,7 +24,7 @@ function App() {
         <Route exact path="/stories/:slug" component={StoriesDetails} />
         <Route component={Error} />
       </Switch>
-    </div>
+    </>
   );
 }
 
