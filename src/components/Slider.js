@@ -6,11 +6,11 @@ export default class Slider extends Component {
   static contextType = ArtContext;
 
   render() {
-    const { name, age } = this.context;
+    // const { name, age } = this.context;
 
     return (
       <div>
-        I'm {name} and I'm {age} years old
+        I'm  and I'm years old
       </div>
     )
   }
