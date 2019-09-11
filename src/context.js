@@ -7,8 +7,8 @@ const ArtContext = React.createContext();
 class ArtProvider extends Component {
   state = {
     stories: [],
-    title: [],
-    image: []
+    featured: [],
+
   };
 
   getData = async () => {
@@ -17,11 +17,12 @@ class ArtProvider extends Component {
         // content_type: 'art'
       });
       let stories = this.formatData(response.items);
-
-      //formatar data
-      //extratir o contenful
-      //montar os componentes
-
+      // console.log(stories);
+      let featured = stories.filter(story => story.featured === true);
+      this.setState({
+        stories, featured
+      });
+      return stories
     } catch (error) {
       console.log(error);
     }
@@ -30,6 +31,7 @@ class ArtProvider extends Component {
 
   componentDidMount() {
     this.getData()
+
   }
 
   formatData(items) {
@@ -37,26 +39,19 @@ class ArtProvider extends Component {
     let tempItems = items.map(item => {
 
       let contentType = item.sys.contentType.sys.id
+      let featured = item.fields.featured
+      let id = item.sys.id
+      let audioField = item.fields.audio
+      let audio = audioField ? item.fields.audio.fields.file.url : false;
+      let artImages = item.fields.photo
+      let images = artImages ? item.fields.photo.fields.file.url : false;
+      let stories = { ...item.fields, id, photo: images, contentType: contentType, featured, audio }
 
-      if (contentType === 'art') {
-        let artId = item.sys.id
-        let artTitle = item.fields.title
-        let artImages = item.fields.photo.fields.file.url
-        if (item.fields.featured) {
+      return stories;
 
-        }
-      }
-
-
-      if (contentType === 'piece') {
-
-        if (item.fields.featured) {
-
-        }
-      }
     })
+    return tempItems;
   }
-
 
   render() {
     return (
