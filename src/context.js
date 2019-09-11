@@ -14,13 +14,11 @@ class ArtProvider extends Component {
   getData = async () => {
     try {
       let response = await Client.getEntries({
-        content_type: 'art'
+        // content_type: 'art'
       });
-      // console.log(response.items);
       let stories = this.formatData(response.items);
+
       //formatar data
-
-
       //extratir o contenful
       //montar os componentes
 
@@ -37,11 +35,25 @@ class ArtProvider extends Component {
   formatData(items) {
 
     let tempItems = items.map(item => {
-      let id = item.sys.id
-      let title = item.fields.title
-      let images = item.fields.photo.fields.file.url
-      console.log(title);
 
+      let contentType = item.sys.contentType.sys.id
+
+      if (contentType === 'art') {
+        let artId = item.sys.id
+        let artTitle = item.fields.title
+        let artImages = item.fields.photo.fields.file.url
+        if (item.fields.featured) {
+
+        }
+      }
+
+
+      if (contentType === 'piece') {
+
+        if (item.fields.featured) {
+
+        }
+      }
     })
   }
 
