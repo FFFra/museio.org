@@ -13,10 +13,21 @@ export default function FeaturedSlider(props) {
     slidesToScroll: 3
   };
 
+  let featuredSlider = props.featured.map(featured => {
+    const { photo, title, id } = featured;
+
+    return (
+      <div key={id}>
+        <img src={photo ? photo : null} alt="featured image" />
+        <h1>{title}</h1>
+      </div>
+    );
+  })
+
   return (
     <section>
       <Slider {...settings}>
-        {props.children}
+        {featuredSlider}
       </Slider>
     </section>
   )

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Slider from '../components/FeaturedSlider';
+import FeaturedSlider from '../components/FeaturedSlider';
 import { ArtContext } from '../context';
 import GalleryCard from '../components/GalleryCard';
 
@@ -11,24 +11,11 @@ export default class Home extends Component {
 
     const { featured, stories, location, museum, piece } = this.context;
 
-    console.log(museum);
-
-
-    let featuredSlider = featured.map(featured => {
-      const { photo, title, id } = featured;
-      return (
-        <div key={id}>
-          <img src={photo} alt="featured image" />
-          <h1>{title}</h1>
-        </div>
-      )
-    })
-
     return (
       <section>
-        <Slider>
-          {featuredSlider}
-        </Slider>
+        <FeaturedSlider
+          featured={featured}
+        />
         <h1>Museio is a project to collect audio and video stories about art</h1>
         <h3>Next time you're in an art gallery, take Museio with you to discover the stories behind your favourite artworks, narrated by experts and fans around the world</h3>
         <h2>Featured Destinations</h2>
