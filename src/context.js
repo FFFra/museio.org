@@ -8,25 +8,30 @@ class ArtProvider extends Component {
   state = {
     stories: [],
     featured: [],
-
+    location: [],
+    museum: [],
+    piece: []
   };
 
   getData = async () => {
     try {
       let response = await Client.getEntries({
         // content_type: 'art'
+        limit: 900,
       });
       let stories = this.formatData(response.items);
-      // console.log(stories);
       let featured = stories.filter(story => story.featured === true);
+      let location = stories.filter(location => location.contentType === 'location');
+      let museum = stories.filter(museum => museum.contentType === 'museum');
+      let piece = stories.filter(piece => piece.contentType === 'piece');
       this.setState({
-        stories, featured
+        stories, featured, location, museum, piece
       });
       return stories
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
 
   componentDidMount() {
@@ -51,7 +56,7 @@ class ArtProvider extends Component {
 
     })
     return tempItems;
-  }
+  };
 
   render() {
     return (
@@ -59,8 +64,8 @@ class ArtProvider extends Component {
         {this.props.children}
       </ArtContext.Provider>
     )
-  }
-}
+  };
+};
 
 const ArtConsumer = ArtContext.Consumer;
 

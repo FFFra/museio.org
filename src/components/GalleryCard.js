@@ -1,10 +1,12 @@
 import React from 'react'
 
-function GalleryCard() {
+function GalleryCard(props) {
   return (
-    <div>
-      hello from gallery
-    </div>
+    <section>
+      <h1>{props.city}</h1>
+      <img src={props.photo} alt="" />
+      <p>{props.gallery}</p>
+    </section>
   )
 }
 
