@@ -8,7 +8,7 @@ class ArtProvider extends Component {
   state = {
     stories: [],
     featured: [],
-    location: [],
+    city: [],
     museum: [],
     piece: []
   };
@@ -21,12 +21,13 @@ class ArtProvider extends Component {
       });
       let stories = this.formatData(response.items);
       let featured = stories.filter(story => story.featured === true);
-      let location = stories.filter(location => location.contentType === 'location');
+      let city = stories.filter(city => city.contentType === 'city');
       let museum = stories.filter(museum => museum.contentType === 'museum');
       let piece = stories.filter(piece => piece.contentType === 'piece');
       this.setState({
-        stories, featured, location, museum, piece
+        stories, featured, city, museum, piece
       });
+
       return stories
     } catch (error) {
       console.log(error);
@@ -51,16 +52,23 @@ class ArtProvider extends Component {
       let artImages = item.fields.photo
       let images = artImages ? item.fields.photo.fields.file.url : false;
       let stories = { ...item.fields, id, photo: images, contentType: contentType, featured, audio }
-
       return stories;
 
     })
     return tempItems;
   };
 
+  getStories = (slug) => {
+    let tempStories = [...this.state.stories]
+    //checar se precisa formatar o slug para subir ao nivel desejado
+    //explicado aos 2:28 do video
+    const storie = tempStories.find(storie => storie.slug === slug)
+    return storie
+  }
+
   render() {
     return (
-      <ArtContext.Provider value={{ ...this.state }}>
+      <ArtContext.Provider value={{ ...this.state, getRoom: this.getRoom }}>
         {this.props.children}
       </ArtContext.Provider>
     )
