@@ -10,7 +10,8 @@ class ArtProvider extends Component {
     featured: [],
     city: [],
     museum: [],
-    piece: []
+    piece: [],
+    museumSlug: []
   };
 
   getData = async () => {
