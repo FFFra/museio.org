@@ -69,7 +69,7 @@ class ArtProvider extends Component {
 
   render() {
     return (
-      <ArtContext.Provider value={{ ...this.state, getRoom: this.getRoom }}>
+      <ArtContext.Provider value={{ ...this.state, getStories: this.getStories }}>
         {this.props.children}
       </ArtContext.Provider>
     )
