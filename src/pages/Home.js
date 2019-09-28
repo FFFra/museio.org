@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FeaturedSlider from '../components/FeaturedSlider';
 import { ArtContext } from '../context';
 import GalleryList from '../components/GalleryList/GalleryList'
+import FeaturedList from '../components/FeaturedStoriesList/FeaturedList'
 
 export default class Home extends Component {
   static contextType = ArtContext;
@@ -9,6 +10,7 @@ export default class Home extends Component {
   render() {
 
     const { featured, stories, city, museum, piece } = this.context;
+
     return (
       <section>
         <FeaturedSlider
@@ -22,6 +24,9 @@ export default class Home extends Component {
           museum={museum}
         />
         <h2>Featured Stories</h2>
+        <FeaturedList
+          stories={featured}
+        />
       </section>
     )
   }

@@ -25,12 +25,12 @@ function getMuseumsByCity(slug, museums) {
     const museumCitySlug = museum.city.fields.slug
     return museumCitySlug === slug
   })
-  console.log(museusFiltered)
   return museusFiltered.map(museum =>
     <div>
       <GalleryCard
         image={museum.image.fields.file.url}
         name={museum.name}
+        slug={museum.slug}
       />
     </div>)
 }

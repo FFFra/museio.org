@@ -1,5 +1,5 @@
 .pod {
-    display: grid;
+      display: grid;
     grid-template-columns: 60px 1fr;
     align-items: center;
     justify-items: left;
@@ -18,4 +18,9 @@
   float: left;
   margin-right: 15px;
   border-radius: 30px;
+  }
+
+  .story_time {
+    color: #bbb;
+    margin-left: 10px;
 }
