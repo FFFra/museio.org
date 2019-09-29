@@ -7,16 +7,16 @@ export default class GalleriesDetails extends Component {
     slug: this.props.match.params.slug
   }
   render() {
-    const { getStories } = this.context;
-    const museum = getStories(this.state.slug);
+    const { getStoriesPerMuseum } = this.context;
+    const stories = getStoriesPerMuseum(this.state.slug);
 
-    console.log(museum);
+    console.log(stories);
 
     //alterar get data
     //cruzar slug do museu com do storie
     //criar novo metodo get
 
-    if (!museum) {
+    if (!stories) {
       return (
         <div>
           <h3>no such gallery</h3>
@@ -28,7 +28,7 @@ export default class GalleriesDetails extends Component {
     }
     return (
       <div>
-        <p>{this.state.slug}</p>
+        <p>{stories.location}</p>
       </div>
     )
   }
