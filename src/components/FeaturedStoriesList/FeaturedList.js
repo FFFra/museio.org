@@ -4,8 +4,8 @@ import FeaturedCard from './FeaturedStoriesCard/FeaturedCard'
 export default function FeaturedList(props) {
 
   let featuredList = props.stories.map(story =>
-    <div>
-      {story.title != undefined ?
+    <div key={story.id}>
+      {story.title !== undefined ?
         <FeaturedCard
           image={story.photo}
           title={story.title}

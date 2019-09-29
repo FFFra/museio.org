@@ -9,7 +9,7 @@ export default class Home extends Component {
 
   render() {
 
-    const { featured, stories, city, museum, piece } = this.context;
+    const { featured, stories, city, museum } = this.context;
 
     return (
       <section>

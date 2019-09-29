@@ -26,7 +26,7 @@ function getMuseumsByCity(slug, museums) {
     return museumsCitySlug === slug
   })
   return museusFiltered.map(museum =>
-    <div>
+    <div key={museum.id}>
       <GalleryCard
         image={museum.image.fields.file.url}
         name={museum.name}
@@ -56,7 +56,8 @@ export default function GalleryList(props) {
 
   //console.log({ citiesList, museum: props.museum })
 
-  return citiesList.map((slug, index) => <div>
+  return citiesList.map((slug, index) => <div key={index}>
+
     <h4>{getCityName(props.museum)[index]}</h4>
     {getMuseumsByCity(slug, props.museum)}
   </div>)

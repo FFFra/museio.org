@@ -18,7 +18,7 @@ export default function FeaturedSlider(props) {
 
     return (
       <div key={id}>
-        <img src={photo ? photo : null} alt="featured image" />
+        <img src={photo ? photo : null} alt={title} />
         <h1>{title}</h1>
       </div>
     );
