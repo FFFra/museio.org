@@ -29,7 +29,7 @@ class ArtProvider extends Component {
       this.setState({
         stories, featured, city, museum, piece
       });
-      console.log(this.state.stories);
+
       return stories
     } catch (error) {
       console.log(error);
@@ -51,10 +51,9 @@ class ArtProvider extends Component {
       let audioField = item.fields.audio
       let audio = audioField ? item.fields.audio.fields.file.url : false;
       let artImages = item.fields.photo
-      let images = artImages ? item.fields.photo.fields.file.url : 'caralho';
+      let images = artImages ? item.fields.photo.fields.file.url : false;
       let stories = { ...item.fields, id, photo: images, contentType: contentType, featured, audio }
       return stories;
-
     })
     return tempItems;
   };

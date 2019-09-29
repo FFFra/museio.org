@@ -6,7 +6,7 @@ const GalleryCard = (props) => (
 
   <Link to={`/galleries/${props.slug}`}>
     <div className="pod">
-      <img className="gallery-photo" src={props.image} alt="" />
+      <img className="gallery-photo" src={props.image.toString()} alt="" />
       <span>{props.name}</span>
     </div>
   </Link>

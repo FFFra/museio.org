@@ -22,6 +22,7 @@ export default class Home extends Component {
         <GalleryList
           city={city}
           museum={museum}
+          stories={stories}
         />
         <h2>Featured Stories</h2>
         <FeaturedList

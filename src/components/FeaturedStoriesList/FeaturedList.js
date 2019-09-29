@@ -3,14 +3,16 @@ import FeaturedCard from './FeaturedStoriesCard/FeaturedCard'
 
 export default function FeaturedList(props) {
 
-  return props.stories.map(story =>
+  let featuredList = props.stories.map(story =>
     <div>
-      <FeaturedCard
-        image={story.photo}
-        title={story.title}
-        duration={story.duration}
-        slug={story.slug}
-      />
+      {story.title != undefined ?
+        <FeaturedCard
+          image={story.photo}
+          title={story.title}
+          duration={story.duration}
+          slug={story.slug}
+        /> : null}
     </div>
   )
+  return <>{featuredList}</>
 }
