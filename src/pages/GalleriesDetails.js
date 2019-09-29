@@ -8,10 +8,15 @@ export default class GalleriesDetails extends Component {
   }
   render() {
     const { getStories } = this.context;
-    const gallerie = getStories(this.state.slug);
+    const museum = getStories(this.state.slug);
 
-    console.log(gallerie);
-    if (!gallerie) {
+    console.log(museum);
+
+    //alterar get data
+    //cruzar slug do museu com do storie
+    //criar novo metodo get
+
+    if (!museum) {
       return (
         <div>
           <h3>no such gallery</h3>

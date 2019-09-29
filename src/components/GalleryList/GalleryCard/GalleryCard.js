@@ -13,5 +13,4 @@ const GalleryCard = (props) => (
 
 )
 
-
 export default GalleryCard;
