@@ -3,13 +3,6 @@ import FeaturedCard from './FeaturedStoriesCard/FeaturedCard'
 
 export default function FeaturedList(props) {
 
-  console.log(props.stories);
-
-  //filter featured stories done
-  //montar o component
-  //dar map nos features exibindo:
-  //name, data, artist, duration
-
   return props.stories.map(story =>
     <div>
       <FeaturedCard
@@ -19,6 +12,5 @@ export default function FeaturedList(props) {
         slug={story.slug}
       />
     </div>
-
   )
 }

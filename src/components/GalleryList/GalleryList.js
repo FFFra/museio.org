@@ -22,8 +22,8 @@ function getCityName(city) {
 
 function getMuseumsByCity(slug, museums) {
   const museusFiltered = museums.filter(museum => {
-    const museumCitySlug = museum.city.fields.slug
-    return museumCitySlug === slug
+    const museumsCitySlug = museum.city.fields.slug
+    return museumsCitySlug === slug
   })
   return museusFiltered.map(museum =>
     <div>
@@ -36,9 +36,9 @@ function getMuseumsByCity(slug, museums) {
 }
 
 export default function GalleryList(props) {
-  if (props.museum.length === 0) {
-    return "zero"
-  }
+  // if (props.museum.length === 0) {
+  //   return undefined
+  // }
 
   const citiesList = props.museum.reduce(
     (acum, gallery) => {
@@ -54,7 +54,7 @@ export default function GalleryList(props) {
     []
   )
 
-  console.log({ citiesList, museum: props.museum })
+  //console.log({ citiesList, museum: props.museum })
 
   return citiesList.map((slug, index) => <div>
     <h4>{getCityName(props.museum)[index]}</h4>

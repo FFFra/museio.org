@@ -11,8 +11,9 @@ class ArtProvider extends Component {
     city: [],
     museum: [],
     piece: [],
-    museumSlug: []
   };
+
+
 
   getData = async () => {
     try {
@@ -28,7 +29,7 @@ class ArtProvider extends Component {
       this.setState({
         stories, featured, city, museum, piece
       });
-
+      console.log(this.state.stories);
       return stories
     } catch (error) {
       console.log(error);
@@ -38,7 +39,6 @@ class ArtProvider extends Component {
 
   componentDidMount() {
     this.getData()
-
   }
 
   formatData(items) {
@@ -51,7 +51,7 @@ class ArtProvider extends Component {
       let audioField = item.fields.audio
       let audio = audioField ? item.fields.audio.fields.file.url : false;
       let artImages = item.fields.photo
-      let images = artImages ? item.fields.photo.fields.file.url : false;
+      let images = artImages ? item.fields.photo.fields.file.url : 'caralho';
       let stories = { ...item.fields, id, photo: images, contentType: contentType, featured, audio }
       return stories;
 
@@ -61,8 +61,6 @@ class ArtProvider extends Component {
 
   getStories = (slug) => {
     let tempStories = [...this.state.stories]
-    //checar se precisa formatar o slug para subir ao nivel desejado
-    //explicado aos 2:28 do video
     const storie = tempStories.find(storie => storie.slug === slug)
     return storie
   }

@@ -1,7 +1,6 @@
 import React from 'react';
-import Style from './FeaturedCard.css';
+import './FeaturedCard.css';
 import { Link } from 'react-router-dom';
-import { HashRouter } from 'react-router-dom';
 
 export default function FeaturedCard(props) {
   return (
