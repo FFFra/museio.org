@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Client from './Contentful';
-import { whileStatement } from '@babel/types';
-
 
 const ArtContext = React.createContext();
 
@@ -23,16 +21,16 @@ class ArtProvider extends Component {
         // content_type: 'art'
         limit: 900,
       });
-      let stories = this.formatData(response.items);
+      let stories = this.formatStoriesData(response.items);
+      let location = this.formatLocationData(stories);
       let featured = stories.filter(story => story.featured === true);
       let city = stories.filter(city => city.contentType === 'city');
       let museum = stories.filter(museum => museum.contentType === 'museum');
       let piece = stories.filter(piece => piece.contentType === 'piece');
-      let location = stories.filter(location => location.contentType === 'location');
-
       this.setState({
         stories, featured, city, museum, piece, location
       });
+      // console.log('final location: ', location);
 
       return stories
     } catch (error) {
@@ -45,7 +43,7 @@ class ArtProvider extends Component {
     this.getData()
   }
 
-  formatData(items) {
+  formatStoriesData(items) {
 
     let tempItems = items.map(item => {
 
@@ -62,6 +60,28 @@ class ArtProvider extends Component {
     return tempItems;
   };
 
+  formatLocationData(items) {
+    let data = items.filter(data => data.contentType === 'location');
+    console.log(data);
+
+    let tempLocation = data.map(data => {
+
+
+      let museumSlug = data.museum.fields.slug
+      let tempStories = data.stories.map(item => {
+        let path = item.fields
+        let photo = path.photo.fields.file.url
+        let duration = path.duration
+        let title = path.title
+        let location = { ...item.fields, photo, duration, title, museumSlug }
+
+        return location;
+      })
+      return tempStories
+    })
+    return tempLocation;
+  };
+
   getStoriesDetails = (slug) => {
     let tempStories = [...this.state.stories]
     const storie = tempStories.find(storie => storie.slug === slug)
@@ -69,17 +89,10 @@ class ArtProvider extends Component {
   }
 
   getStoriesPerMuseum = (slug) => {
-
     let tempLocation = [...this.state.location]
+    let filteredLocation = tempLocation.flat().filter(item => item.museumSlug === slug)
 
-    let selectedLocation = tempLocation.filter(location => {
-
-      let locationSlug = location.museum.fields.slug
-
-      return locationSlug === slug
-    }
-    )
-    return selectedLocation
+    return filteredLocation
   }
 
   render() {

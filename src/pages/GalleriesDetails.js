@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 import { ArtContext } from '../context';
 import { Link } from 'react-router-dom';
+import FeaturedCard from '../components/FeaturedStoriesList/FeaturedStoriesCard/FeaturedCard'
 export default class GalleriesDetails extends Component {
-  static contextType = ArtContext;
   state = {
     slug: this.props.match.params.slug
   }
+  static contextType = ArtContext;
+
   render() {
     const { getStoriesPerMuseum } = this.context;
     const stories = getStoriesPerMuseum(this.state.slug);
-
-    console.log(stories);
-
-    //alterar get data
-    //cruzar slug do museu com do storie
-    //criar novo metodo get
 
     if (!stories) {
       return (
@@ -26,9 +22,18 @@ export default class GalleriesDetails extends Component {
         </div>
       )
     }
+
+    let selected = stories.map(item => {
+      console.log(item);
+      return <p>{item.title}</p>
+    })
+
     return (
       <div>
-        <p>{stories.location}</p>
+        {selected}
+        <h1>{/*museu title*/}</h1>
+        <div>{/*address*/}</div>
+        <span>{/*Googlemaps*/}</span>
       </div>
     )
   }

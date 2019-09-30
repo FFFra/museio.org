@@ -10,6 +10,7 @@ import Error from './pages/Error';
 import { Route, Switch } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route exact path="/stories/:slug" component={StoriesDetails} />
         <Route component={Error} />
       </Switch>
+      <Footer />
     </>
   );
 }
