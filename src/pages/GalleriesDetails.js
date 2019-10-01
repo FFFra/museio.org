@@ -23,17 +23,22 @@ export default class GalleriesDetails extends Component {
       )
     }
 
-    let selected = stories.map(item => {
-      console.log(item);
-      return <p>{item.title}</p>
-    })
+    let storiesList = stories.map(({ title, photo, duration, id }) => <FeaturedCard
+      title={title}
+      image={photo}
+      duration={duration}
+      key={id}
+    />)
+
+    let museuInfo = stories.map(({ address, museumName, id }, index) => index < 1 && <div key={id}>
+      <h1>{museumName}</h1>
+      <p>{address}</p>
+    </div>)
 
     return (
       <div>
-        {selected}
-        <h1>{/*museu title*/}</h1>
-        <div>{/*address*/}</div>
-        <span>{/*Googlemaps*/}</span>
+        {museuInfo}
+        {storiesList}
       </div>
     )
   }

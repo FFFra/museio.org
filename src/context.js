@@ -30,7 +30,6 @@ class ArtProvider extends Component {
       this.setState({
         stories, featured, city, museum, piece, location
       });
-      // console.log('final location: ', location);
 
       return stories
     } catch (error) {
@@ -62,18 +61,20 @@ class ArtProvider extends Component {
 
   formatLocationData(items) {
     let data = items.filter(data => data.contentType === 'location');
-    console.log(data);
 
     let tempLocation = data.map(data => {
+      let museum = data.museum.fields
+      let museumSlug = museum.slug
+      let museumName = museum.name
+      let address = museum.address
 
-
-      let museumSlug = data.museum.fields.slug
       let tempStories = data.stories.map(item => {
         let path = item.fields
         let photo = path.photo.fields.file.url
+        let id = item.sys.id
         let duration = path.duration
         let title = path.title
-        let location = { ...item.fields, photo, duration, title, museumSlug }
+        let location = { ...item.fields, photo, duration, title, museumSlug, museumName, address, id }
 
         return location;
       })
