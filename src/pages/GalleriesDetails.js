@@ -3,6 +3,7 @@ import { ArtContext } from '../context';
 import { Link } from 'react-router-dom';
 import FeaturedCard from '../components/FeaturedStoriesList/FeaturedStoriesCard/FeaturedCard'
 import GoogleMaps from '../components/GoogleMaps/GoogleMaps'
+import Header from '../components/Header/Header'
 
 export default class GalleriesDetails extends Component {
   state = {
@@ -32,9 +33,11 @@ export default class GalleriesDetails extends Component {
       key={id}
     />)
 
-    let museuInfo = stories.map(({ address, museumName, id, lat, lng, museumPhoto, coordinate }, index) => index < 1 && <div key={id}>
-      <h1>{museumName}</h1>
-      <p>{address}</p>
+    let museuInfo = stories.map(({ address, museumName, id, museumPhoto, coordinate }, index) => index < 1 && <div key={id}>
+      <Header
+        title={museumName}
+        details={address}
+      />
       <GoogleMaps
         lat={coordinate.lat}
         lng={coordinate.lon}
