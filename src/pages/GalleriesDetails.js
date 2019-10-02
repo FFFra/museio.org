@@ -26,11 +26,12 @@ export default class GalleriesDetails extends Component {
       )
     }
 
-    let storiesList = stories.map(({ title, storiePhoto, duration, id }) => <FeaturedCard
+    let storiesList = stories.map(({ title, storiePhoto, duration, id, slug }) => <FeaturedCard
       title={title}
       image={storiePhoto}
       duration={duration}
       key={id}
+      slug={slug}
     />)
 
     let museuInfo = stories.map(({ address, museumName, id, museumPhoto, coordinate }, index) => index < 1 && <div key={id}>
@@ -38,11 +39,11 @@ export default class GalleriesDetails extends Component {
         title={museumName}
         details={address}
       />
-      <GoogleMaps
+      {/* <GoogleMaps
         lat={coordinate.lat}
         lng={coordinate.lon}
         image={museumPhoto}
-      />
+     />*/}
     </div>)
 
 
