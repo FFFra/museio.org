@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { ArtContext } from '../context';
 import { Link } from 'react-router-dom';
 import FeaturedCard from '../components/FeaturedStoriesList/FeaturedStoriesCard/FeaturedCard'
+import GoogleMaps from '../components/GoogleMaps/GoogleMaps'
+
 export default class GalleriesDetails extends Component {
   state = {
     slug: this.props.match.params.slug
@@ -23,23 +25,31 @@ export default class GalleriesDetails extends Component {
       )
     }
 
-    let storiesList = stories.map(({ title, photo, duration, id }) => <FeaturedCard
+    let storiesList = stories.map(({ title, storiePhoto, duration, id }) => <FeaturedCard
       title={title}
-      image={photo}
+      image={storiePhoto}
       duration={duration}
       key={id}
     />)
 
-    let museuInfo = stories.map(({ address, museumName, id }, index) => index < 1 && <div key={id}>
+    let museuInfo = stories.map(({ address, museumName, id, lat, lng, museumPhoto, coordinate }, index) => index < 1 && <div key={id}>
       <h1>{museumName}</h1>
       <p>{address}</p>
+      <GoogleMaps
+        lat={coordinate.lat}
+        lng={coordinate.lon}
+        image={museumPhoto}
+      />
     </div>)
+
+
 
     return (
       <div>
         {museuInfo}
         {storiesList}
       </div>
+
     )
   }
 }
