@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-const StoriesDetails = () => {
-  return (
-    <div>
-      Hellow OHPPPPA
-    </div>
-  )
+
+export default class StoriesDetails extends Component {
+  render() {
+    return (
+      <div>
+        detaiiiils
+      </div>
+    )
+  }
 }
-
-export default StoriesDetails

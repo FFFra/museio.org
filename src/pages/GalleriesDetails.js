@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ArtContext } from '../context';
-import { Link } from 'react-router-dom';
 import FeaturedCard from '../components/FeaturedStoriesList/FeaturedStoriesCard/FeaturedCard'
+import ErrorButton from '../components/ErrorButton/ErrorButton'
 import GoogleMaps from '../components/GoogleMaps/GoogleMaps'
 import Header from '../components/Header/Header'
 
@@ -14,14 +14,17 @@ export default class GalleriesDetails extends Component {
   render() {
     const { getStoriesPerMuseum } = this.context;
     const stories = getStoriesPerMuseum(this.state.slug);
+    console.log(stories);
 
-    if (!stories) {
+    if (!stories || stories.length === 0) {
       return (
         <div>
-          <h3>no such gallery</h3>
-          <Link to='/'>
-            Back to home
-          </Link>
+          <ErrorButton
+            error='No data found'
+            data={stories}
+            route='/'
+            text='Back to home'
+          />
         </div>
       )
     }
@@ -39,21 +42,18 @@ export default class GalleriesDetails extends Component {
         title={museumName}
         details={address}
       />
-      {/* <GoogleMaps
+      <GoogleMaps
         lat={coordinate.lat}
         lng={coordinate.lon}
         image={museumPhoto}
-     />*/}
+      />
     </div>)
-
-
 
     return (
       <div>
         {museuInfo}
         {storiesList}
       </div>
-
     )
   }
 }

@@ -62,7 +62,7 @@ class ArtProvider extends Component {
 
   formatLocationData(items) {
     let data = items.filter(data => data.contentType === 'location');
-    console.log(data);
+    // console.log(data);
 
     let tempLocation = data.map(data => {
       let museum = data.museum.fields
