@@ -11,6 +11,7 @@ class ArtProvider extends Component {
     museum: [],
     piece: [],
     location: [],
+    data: []
   };
 
 
@@ -19,8 +20,9 @@ class ArtProvider extends Component {
     try {
       let response = await Client.getEntries({
         // content_type: 'art'
-        limit: 900,
+        limit: 1000,
       });
+      let data = response.items
       let stories = this.formatStoriesData(response.items);
       let location = this.formatLocationData(stories);
       let featured = stories.filter(story => story.featured === true);
@@ -28,7 +30,7 @@ class ArtProvider extends Component {
       let museum = stories.filter(museum => museum.contentType === 'museum');
       let piece = stories.filter(piece => piece.contentType === 'piece');
       this.setState({
-        stories, featured, city, museum, piece, location
+        stories, featured, city, museum, piece, location, data
       });
 
       return stories
@@ -90,7 +92,9 @@ class ArtProvider extends Component {
 
   getStoriesDetails = (slug) => {
     let tempStories = [...this.state.stories]
-    const storie = tempStories.find(storie => storie.slug === slug)
+    const storie = tempStories.find(storie => {
+      return storie.slug === slug
+    })
     return storie
   }
 

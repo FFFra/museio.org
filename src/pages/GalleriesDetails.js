@@ -14,7 +14,6 @@ export default class GalleriesDetails extends Component {
   render() {
     const { getStoriesPerMuseum } = this.context;
     const stories = getStoriesPerMuseum(this.state.slug);
-    console.log(stories);
 
     if (!stories || stories.length === 0) {
       return (
