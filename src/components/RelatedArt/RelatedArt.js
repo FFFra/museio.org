@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 
+
 export default function RelatedArt(props) {
 
   const { relatedArt } = props.story
@@ -12,20 +13,18 @@ export default function RelatedArt(props) {
     let author = data.artist
     let photo = data.photo.fields.file.url
 
+
     let relatedURL = filterRelatedArt(title).map(item => {
       let title = item.title
       let slug = item.slug
       let id = item.id
 
-      return <div key={id}>
-        <Link to={`/stories/${slug}`}>
-          {title}
-        </Link>
-      </div>
+      return <Link
+        to={`/stories/${slug}`}>
+        {title}
+      </Link>
+
     })
-
-    console.log(item);
-
     return <div key={index}>
       <img src={photo} alt={title} />
       {title}

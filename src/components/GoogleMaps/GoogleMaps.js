@@ -10,7 +10,7 @@ const mapStyles = {
 class GoogleMaps extends Component {
   render() {
     return (
-      <div>
+      <div style={{ height: '100px' }}>
         <Map
           google={this.props.google}
           zoom={8}

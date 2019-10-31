@@ -11,7 +11,8 @@ class ArtProvider extends Component {
     museum: [],
     piece: [],
     location: [],
-    data: []
+    data: [],
+    loading: true
   };
 
 
@@ -43,6 +44,16 @@ class ArtProvider extends Component {
 
   componentDidMount() {
     this.getData()
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextState.data.length > 0 && this.state.data.length === 0) {
+      this.setState({
+        loading: false
+      })
+    }
+
+    return true
   }
 
   formatStoriesData(items) {
@@ -89,10 +100,32 @@ class ArtProvider extends Component {
     })
     return tempLocation;
   };
+  /*
+  
+  
+  get museums
+  
+  get museum/ID
+   get all content = name, total
+  
+   get one content = name, address, surname, dfdsf, dsf, sdf
+  
+  
+  */
+
+
+
+
+
 
   getStoriesDetails = (slug) => {
     let tempStories = [...this.state.stories]
     const storie = tempStories.find(storie => {
+
+      if (((storie || {}).slug || "").indexOf("claude") > -1) {
+
+        console.log({ slug, storie: storie.slug })
+      }
       return storie.slug === slug
     })
     return storie
@@ -107,9 +140,10 @@ class ArtProvider extends Component {
 
   render() {
     return (
-      <ArtContext.Provider value={{ ...this.state, getStoriesDetails: this.getStoriesDetails, getStoriesPerMuseum: this.getStoriesPerMuseum }}>
-        {this.props.children}
-      </ArtContext.Provider>
+      this.state.loading ? "Loading ..." :
+        <ArtContext.Provider value={{ ...this.state, getStoriesDetails: this.getStoriesDetails, getStoriesPerMuseum: this.getStoriesPerMuseum }}>
+          {this.props.children}
+        </ArtContext.Provider>
     )
   };
 };

@@ -4,20 +4,13 @@ import Header from '../components/Header/Header';
 import ErrorButton from '../components/ErrorButton/ErrorButton';
 import RelatedArt from '../components/RelatedArt/RelatedArt';
 
-export default class StoriesDetails extends
-
-  Component {
-  state = {
-    slug: this.props.match.params.slug
-  }
-
+export default class StoriesDetails extends Component {
   static contextType = ArtContext
 
   render() {
+
     const { getStoriesDetails, location, piece } = this.context
-    const detail = getStoriesDetails(this.state.slug);
-
-
+    const detail = getStoriesDetails(this.props.match.params.slug);
 
     const getLocation = (location, slug) => {
       let filterLocation = location.flat().filter(loc => loc.slug === slug
@@ -25,8 +18,7 @@ export default class StoriesDetails extends
       return <div><h4>{filterLocation}</h4></div>
     }
 
-    let bestExperienced = getLocation(location, this.state.slug)
-
+    let bestExperienced = getLocation(location, this.props.match.params.slug)
 
     if (!detail || detail.length === 0) {
       return (
@@ -41,11 +33,9 @@ export default class StoriesDetails extends
       )
     }
 
-
     const { title, storyAuthor, audioEmbed, story, duration, storyLink } = detail
 
     function renderAudioEmbed() { return { __html: audioEmbed }; };
-
 
     return <>
       <div>
